@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stabl - Interviews and Responses</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #0A1D37;
+            color: #B0BEC5;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Particle Background */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        header {
+            background-color: #08152B;
+            color: #B0BEC5;
+            text-align: center;
+            padding: 2rem;
+            border-bottom: 2px solid #B0BEC5;
+            animation: pulseHeader 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseHeader {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(176, 190, 197, 0.3); }
+            50% { transform: scale(1.03); box-shadow: 0 0 20px rgba(176, 190, 197, 0.6); }
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 15px rgba(176, 190, 197, 0.7);
+            animation: slideInHeader 1s ease-out;
+        }
+
+        @keyframes slideInHeader {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: typeWriter 2s steps(40) forwards 0.5s;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        @keyframes typeWriter {
+            0% { width: 0; opacity: 1; }
+            100% { width: 100%; opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .interview-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: bubbleBurst 1s ease-out forwards;
+            transform-origin: center;
+        }
+
+        .interview-card:nth-child(1) { animation-delay: 0.2s; }
+        .interview-card:nth-child(2) { animation-delay: 0.4s; }
+        .interview-card:nth-child(3) { animation-delay: 0.6s; }
+        .interview-card:nth-child(4) { animation-delay: 0.8s; }
+        .interview-card:nth-child(5) { animation-delay: 1.0s; }
+        .interview-card:nth-child(6) { animation-delay: 1.2s; }
+        .interview-card:nth-child(7) { animation-delay: 1.4s; }
+
+        @keyframes bubbleBurst {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(-10deg) translateX(-50px);
+            }
+            70% {
+                transform: scale(1.15) rotate(5deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg) translateX(0);
+            }
+        }
+
+        .interview-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid #B0BEC5;
+            flex-shrink: 0;
+            animation: bounceAvatar 2s ease-in-out infinite;
+            transition: transform 0.5s ease;
+        }
+
+        .interview-card img:hover {
+            transform: rotate(360deg) scale(1.2);
+        }
+
+        @keyframes bounceAvatar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .interview-content {
+            position: relative;
+            background-color: #122449;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 0 15px rgba(176, 190, 197, 0.4);
+            flex-grow: 1;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .interview-content:hover {
+            animation: dramaticHover 0.5s ease forwards;
+            background-color: #1e3a6b;
+            box-shadow: 0 0 30px rgba(176, 190, 197, 0.9), 0 0 50px rgba(176, 190, 197, 0.6);
+        }
+
+        @keyframes dramaticHover {
+            0% {
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(3deg);
+            }
+            100% {
+                transform: scale(1.05) rotate(0deg);
+            }
+        }
+
+        .interview-content::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 10px solid #122449;
+            transition: border-right-color 0.3s ease;
+        }
+
+        .interview-content:hover::before {
+            border-right-color: #1e3a6b;
+        }
+
+        .interview-content h2 {
+            font-size: 1.5rem;
+            color: #B0BEC5;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(176, 190, 197, 0.6);
+            opacity: 0;
+            animation: slideInText 0.8s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        .interview-content p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #B0BEC5;
+            opacity: 0;
+            animation: slideInText 0.8s ease-out forwards;
+            animation-delay: 0.7s;
+        }
+
+        @keyframes slideInText {
+            0% { opacity: 0; transform: translateX(30px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        footer {
+            background-color: #08152B;
+            color: #B0BEC5;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            border-top: 2px solid #B0BEC5;
+            animation: floatFooter 3s ease-in-out infinite;
+        }
+
+        @keyframes floatFooter {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .interview-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .interview-card img {
+                margin-bottom: 0.5rem;
+            }
+
+            .interview-content::before {
+                left: 50%;
+                top: -10px;
+                transform: translateX(-50%);
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-bottom: 10px solid #122449;
+                border-top: none;
+            }
+
+            .interview-content:hover::before {
+                border-bottom-color: #1e3a6b;
+                border-right-color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles"></canvas>
+    <header>
+        <h1>Stabl - Voices from the Gym</h1>
+        <p>Hear what fitness enthusiasts say about the need for a Made in India gym shoe brand</p>
+    </header>
+
+    <div class="container">
+        <div class="interview-card">
+            <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Rishabh&gender=male" alt="Rishabh Avatar">
+            <div class="interview-content">
+                <h2>Rishabh, 24 – Delhi, Fitness Coach</h2>
+                <p>"Honestly, like most people I train just wear running shoes or basic sneakers at the gym. There’s no popular gym-specific shoe brand that comes to mind. If there was a legit Made in India brand engineered just for gym performance, I’d definitely try it out—it’s long overdue."</p>
+            </div>
+        </div>
+
+        <div class="interview-card">
+            <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Ayesha&gender=female" alt="Ayesha Avatar">
+            <div class="interview-content">
+                <h2>Ayesha, 22 – Pune, College Student</h2>
+                <p>"I usually wear Vans to the gym—they look good but I don’t think they’re meant for lifting since they’re worn out already. I don’t think I’ve seen any Indian brand focused only on gym shoes. If one existed and had a cool design with proper support, I’d switch instantly."</p>
+            </div>
+        </div>
+
+        <div class="interview-card">
+            <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Omkar&gender=male" alt="Omkar Avatar">
+            <div class="interview-content">
+                <h2>Omkar, 27 – Mumbai, Corporate Professional</h2>
+                <p>"I have been training for around 10 years. It’s always Nike Romaleos or Reebok Nanos, but they’re extremely expensive and hard to find here. An Indian brand making proper gym shoes would be awesome, especially if they understood what lifters and cross-trainers actually need with the right budget."</p>
+            </div>
+        </div>
+
+        <div class="interview-card">
+            <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Sakshi&gender=female" alt="Sakshi Avatar">
+            <div class="interview-content">
+                <h2>Sakshi, 30 – Delhi, Pilates Instructor</h2>
+                <p>"Most of the shoes people wear aren’t stable at all—no heel support, no grip. If someone made a shoe in India that’s functional and stylish, I’d recommend it to all my clients. It’s a huge gap in the market."</p>
+            </div>
+        </div>
+
+        <div class="interview-card">
+            <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Harsh&gender=male" alt="Harsh Avatar">
+            <div class="interview-content">
+                <h2>Harsh, 18 – Pune, Beginner Lifter</h2>
+                <p>"I just wear my running shoes to the gym... didn’t know there’s a difference. But yeah, if a brand specifically focused on gym shoes and explained why they’re better for lifting, I’d check it out. Especially if it’s Made in India."</p>
+            </div>
+        </div>
+
+        <div class="interview-card">
+            <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Devika&gender=female" alt="Devika Avatar">
+            <div class="interview-content">
+                <h2>Devika, 21 – Mumbai, Fitness Content Creator</h2>
+                <p>"There’s literally no Indian brand I can tag or promote for proper gym shoes—everything’s either foreign or lifestyle wear. If Stabl nails performance and looks clean on camera, trust me, there’s a whole market ready for it, also please make the box 'Instagrammable'."</p>
+            </div>
+        </div>
+
+        <div class="interview-card">
+            <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Aman&gender=male" alt="Aman Avatar">
+            <div class="interview-content">
+                <h2>Aman, 33 – Delhi, National Weightlifting Athlete</h2>
+                <p>"Right now I import my lifting shoes—they’re way overpriced here. We need something local that gets the technical side right: ankle support, sole grip, heel height. If STABL does that, I’d be your first customer."</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Stabl. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Particle Background Animation
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particlesArray = [];
+        const numberOfParticles = 50;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 5 + 2;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.size > 0.2) this.size -= 0.05;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(176, 190, 197, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+                if (particlesArray[i].size <= 0.2) {
+                    particlesArray.splice(i, 1);
+                    particlesArray.push(new Particle());
+                    i--;
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Smooth scroll for any future anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
